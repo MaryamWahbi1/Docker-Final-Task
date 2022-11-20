@@ -137,5 +137,5 @@ services:
 
 [![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_images.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_images.PNG?raw=true)
 
-[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_images.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_images.PNG?raw=true)
+[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/curl.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/curl.PNG?raw=true)
 
