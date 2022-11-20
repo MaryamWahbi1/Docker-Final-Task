@@ -9,6 +9,9 @@
 
 3. Create a Jenkinsfile for CI/CD that creates and pushes the generated Web application Docker image to Docker Hub.
 
+------------
+
+
 ### Step 1: Define the application dependencies
 #### 1. Create a directory for the project:
 ```shell
@@ -76,6 +79,10 @@ redis
 requests
 
 ```
+
+------------
+
+
 ### Step 2: Create a Dockerfile
 ```
 # syntax=docker/dockerfile:1
@@ -90,6 +97,10 @@ EXPOSE 5000
 COPY . .
 CMD ["flask", "run"]
 ```
+
+------------
+
+
 ### Step 3: Define services in a Compose file
 ```
 version: "3.9"
@@ -101,6 +112,10 @@ services:
   redis:
     image: "redis:alpine"
 ```
+
+------------
+
+
 ### Step 4: Build and run your app with Compose
 1. Running docker compose up.
 
@@ -110,7 +125,11 @@ services:
 
 [![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/BitCoin_Price_HTML.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/BitCoin_Price_HTML.PNG?raw=true)
 
+------------
 
+
+# dockerhub repository
+[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/Dockerhub.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/Dockerhub.PNG?raw=true)
 
 
 
