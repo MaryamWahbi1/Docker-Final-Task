@@ -13,11 +13,8 @@
 
 
 ### Step 1: Define the application dependencies
-#### 1. Create a directory for the project:
-```shell
-mkdir HW4
-cd HW4
-```
+#### 1. Create a directory for the project.
+
 #### 2. Create a file called app.py my project directory:
 ```python
 # Import libraries
