@@ -128,9 +128,14 @@ services:
 ------------
 
 
-# dockerhub repository
+# dockerhub 
 [![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/Dockerhub.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/Dockerhub.PNG?raw=true)
 
 
+[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_pull.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_pull.PNG?raw=true)
 
+
+[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_images.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_images.PNG?raw=true)
+
+[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_images.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_images.PNG?raw=true)
 
