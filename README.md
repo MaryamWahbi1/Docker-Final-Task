@@ -126,7 +126,7 @@ services:
 [![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/BitCoin_Price_HTML.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/BitCoin_Price_HTML.PNG?raw=true)
 
 ------------
-# Jenkins - Pipline
+### Step 5: Create a Jenkinsfile for CI/CD that creates and pushes the generated Web application Docker image to Docker Hub
 ```
 pipeline {
     agent any
@@ -160,11 +160,7 @@ pipeline {
 }
 ```
 [![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/pipline.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/pipline.PNG?raw=true)
-------------
 
-
-
-# dockerhub 
 [![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/Dockerhub.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/Dockerhub.PNG?raw=true)
 
 
