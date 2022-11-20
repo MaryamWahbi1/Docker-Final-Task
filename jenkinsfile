@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+ stages {
+        stage('Git Clone') {
+            steps {
+                git url:"https://github.com/MaryamWahbi1/Docker-Final-Task.git", branch:'master'
+            }
+        }
+        stage('Build Docker') {
+            steps {
+                sh 'docker build -t python-flask-ci:$BUILD_NUMBER .'
+            }
+        }
+        stage('Tag Docker') {
+            steps {
+               sh 'docker tag python-flask-ci:$BUILD_NUMBER maryamwahbi/python-flask-ci:$BUILD_NUMBER'
+            }
+        }
+        stage('Push Docker') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'username')]) {
+                    // the code here can access $pass and $user
+                    sh 'docker login -u ${username} -p ${pass}'
+                    sh 'docker push maryamwahbi/python-flask-ci:$BUILD_NUMBER'
+                }
+            }
+        }
+    }
+}
+
