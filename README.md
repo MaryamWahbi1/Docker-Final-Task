@@ -56,9 +56,6 @@ docker run -d -p 8080:8080 maryamwahbi/python-flask-ci:latest
 
 ------------
 ## Jenkins
-**Create a Jenkinsfile for CI/CD that creates and pushes the generated Web application Docker image to Docker Hub**
+**Create a Jenkinsfile for CI/CD that creates and pushes the generated Web application Docker image to DockerHub**
 
 ![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/pipline.PNG?raw=true)
-
-
-
