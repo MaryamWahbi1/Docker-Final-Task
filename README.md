@@ -1,7 +1,8 @@
 # Docker Final Task
 ![](https://i0.wp.com/piotrminkowski.com/wp-content/uploads/2017/03/jenkins-docker-muscles.jpg?fit=1131%2C564&ssl=1)
 
-### Explanation of the task
+
+## Explanation of the task
 
 1. Create a Python Web APP (use either Flask or FastAPI libraries) that:
 - Presents the Current BitCoin Price
@@ -12,161 +13,50 @@
 3. Create a Jenkinsfile for CI/CD that creates and pushes the generated Web application Docker image to Docker Hub.
 
 ------------
+## Prerequisites
+You need to have Docker Engine and Docker Compose on your machine. You can either:
 
-
-### Step 1: Define the application dependencies
-#### 1. Create a directory for the project.
-
-#### 2. Create a file called app.py my project directory:
-```python
-# Import libraries
-import time
-import datetime
-import redis
-from flask import Flask, redirect, url_for, render_template, request, flash
-import json
-import requests
-
-app = Flask(__name__)
-cache = redis.Redis(host='redis', port=6379)
-
-#  get current time
-current_time = datetime.datetime.now()
-#  get current date
-curr_date = current_time.strftime("%d/%m/%Y %H:%M:%S")
-
-# function that return the current BitCoin price
-def Current_BitCoin_Price():
-    # Defining Binance API URL
-    key = "https://api.coindesk.com/v1/bpi/currentprice.json"
-    response = (requests.get(key))
-    # requesting data from url
-    data = response.json()
-    price = data['bpi']["USD"]['rate']
-    return ""+str(curr_date)+" --> "+str(price)+"$"
-
-# function that return the average price for the last 10 minutes
-def Price_Avg():
-    # Defining Binance API URL
-    key = "https://min-api.cryptocompare.com/data/v2/histominute?fsym=BTC&tsym=USD&limit=10"
-    response = (requests.get(key))
-    data = response.json()
-    prices =[]   
-    #last 10 minutes
-    t = 10
-    # running loop to print all crypto prices in the last 10 minutes
-    for i in range(t):
-        price = data['Data']["Data"][i]['close']
-        prices.append(price)
-             
-    price_len = len(prices)
-    price_sum = sum(prices)
-    #the Average Price for the last 10 minutes
-    average = price_sum / price_len 
-    #return the average price for the last 10 minutes
-    return "Average "+" --> "+str(average)+"$"
-
-@app.route('/')
-def hello():
-    count = Price_Avg()
-    return render_template('index.html',first_text=Current_BitCoin_Price(),second_text=Price_Avg())
-```
-#### 3. Create another file called requirements.txt in project directory:
-```
-flask
-redis
-requests
-
-```
+- Install Docker Engine and Docker Compose as standalone binaries.
+- Install Docker Desktop which includes both Docker Engine and Docker Compose.
 
 ------------
+## Run Locally
 
+**1. Clone the project**
+```shell
+git clone https://github.com/MaryamWahbi1/Docker-Final-Task.git
+```
+**2. Go to the project directory:**
+```shell
+cd Docker-Final-Task
+```
+**3. Build**
+```shell
+docker compose up
+```
+![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_compose_up.PNG?raw=true)
 
-### Step 2: Create a Dockerfile
-```
-# syntax=docker/dockerfile:1
-FROM python:3.7-alpine
-WORKDIR /code
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
-RUN apk add --no-cache gcc musl-dev linux-headers
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-EXPOSE 5000
-COPY . .
-CMD ["flask", "run"]
-```
+**4. Enter http://localhost:8000/ in a browser to see the application running**
+If this doesn’t resolve, you can also try http://127.0.0.1:8000.
+![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/BitCoin_Price_HTML.PNG?raw=true)
 
 ------------
+## DockerHub
 
+**Run the image from DockerHub**
 
-### Step 3: Define services in a Compose file
+```shell
+docker pull maryamwahbi/python-flask-ci
+docker run -d -p 8080:8080 maryamwahbi/python-flask-ci:latest
 ```
-version: "3.9"
-services:
-  web:
-    build: .
-    ports:
-      - "8000:5000"
-  redis:
-    image: "redis:alpine"
-```
+
+![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/Dockerhub.PNG?raw=true)
 
 ------------
+## Jenkins
+**Create a Jenkinsfile for CI/CD that creates and pushes the generated Web application Docker image to Docker Hub**
+
+![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/pipline.PNG?raw=true)
 
 
-### Step 4: Build and run your app with Compose
-1. Running docker compose up.
-
-[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_compose_up.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_compose_up.PNG?raw=true)
-
-2. Enter http://localhost:8000/ in a browser to see the application running
-
-[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/BitCoin_Price_HTML.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/BitCoin_Price_HTML.PNG?raw=true)
-
-------------
-### Step 5: Create a Jenkinsfile for CI/CD that creates and pushes the generated Web application Docker image to Docker Hub
-```
-pipeline {
-    agent any
-
- stages {
-        stage('Git Clone') {
-            steps {
-                git url:"https://github.com/MaryamWahbi1/Docker-Final-Task.git", branch:'master'
-            }
-        }
-        stage('Build Docker') {
-            steps {
-                sh 'docker build -t python-flask-ci:$BUILD_NUMBER .'
-            }
-        }
-        stage('Tag Docker') {
-            steps {
-               sh 'docker tag python-flask-ci:$BUILD_NUMBER maryamwahbi/python-flask-ci:$BUILD_NUMBER'
-            }
-        }
-        stage('Push Docker') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'username')]) {
-                    // the code here can access $pass and $user
-                    sh 'docker login -u ${username} -p ${pass}'
-                    sh 'docker push maryamwahbi/python-flask-ci:$BUILD_NUMBER'
-                }
-            }
-        }
-    }
-}
-```
-[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/pipline.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/pipline.PNG?raw=true)
-
-[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/Dockerhub.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/Dockerhub.PNG?raw=true)
-
-
-[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_pull.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_pull.PNG?raw=true)
-
-
-[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_images.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_images.PNG?raw=true)
-
-[![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/curl.PNG?raw=true)](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/curl.PNG?raw=true)
 
