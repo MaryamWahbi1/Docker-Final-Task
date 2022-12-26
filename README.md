@@ -37,7 +37,8 @@ docker compose up
 ![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/docker_compose_up.PNG?raw=true)
 
 **4. Enter http://localhost:8000/ in a browser to see the application running**
-If this doesn’t resolve, you can also try http://127.0.0.1:8000.
+
+**If this doesn’t resolve, you can also try http://127.0.0.1:8000.**
 
 ![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/BitCoin_Price_HTML.PNG?raw=true)
 
@@ -58,3 +59,6 @@ docker run -d -p 8080:8080 maryamwahbi/python-flask-ci:latest
 **Create a Jenkinsfile for CI/CD that creates and pushes the generated Web application Docker image to Docker Hub**
 
 ![](https://github.com/MaryamWahbi1/Docker-Final-Task/blob/master/screenshots/pipline.PNG?raw=true)
+
+
+
