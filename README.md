@@ -1,4 +1,6 @@
 # Docker Final Task
+![](https://media.jvt.me/b0bf1d8c2f.png)
+
 ### Explanation of the task
 
 1. Create a Python Web APP (use either Flask or FastAPI libraries) that:
