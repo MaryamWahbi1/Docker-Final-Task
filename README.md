@@ -1,5 +1,5 @@
 # Docker Final Task
-![](https://media.jvt.me/b0bf1d8c2f.png)
+![](https://i0.wp.com/piotrminkowski.com/wp-content/uploads/2017/03/jenkins-docker-muscles.jpg?fit=1131%2C564&ssl=1)
 
 ### Explanation of the task
 
